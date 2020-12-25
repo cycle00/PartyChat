@@ -1,0 +1,9 @@
+name: PartyChat
+version: 1.0.0
+main: cycle00.partychat.PartyChat
+api-version: 1.16
+author: Cycle00
+commands:
+  party:
+    description: Party management commands.
+    aliases: [p]
