@@ -26,8 +26,9 @@ public class PartyJoin {
         Player inviter = Bukkit.getPlayer(toJoin);
 
         Party party;
-        if (inviter != null)
+        if (inviter != null) {
             party = Party.getParty(inviter);
+        }
         else {
             player.sendMessage(Utils.chat("&cThat player is offline."));
             return;
@@ -42,13 +43,16 @@ public class PartyJoin {
                 party.pendingInvitations.remove(player);
                 for (UUID memberUUID : party.members) {
                     Player member = Bukkit.getPlayer(memberUUID);
-                    if (member != null) continue;
-                    member.sendMessage(Utils.chat("&6" + player + "&a has joined the party."));
+                    if (member != null) {
+                        member.sendMessage(Utils.chat("&6" + player.getDisplayName() + "&a has joined the party."));
+                    }
                 }
                 party.add(player);
-            } else {
-                player.sendMessage(Utils.chat("&cYou do not have an invitation from this player."));
+                player.sendMessage(Utils.chat("&aYou have successfully joined &f" + inviter.getDisplayName() + "'s &aparty."));
+                return;
             }
         }
+
+        player.sendMessage(Utils.chat("&cYou do not have an invitation from this player."));
     }
 }

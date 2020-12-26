@@ -1,9 +1,7 @@
 package cycle00.partychat.commands;
 
 import cycle00.partychat.PartyChat;
-import cycle00.partychat.commands.party.PartyAdd;
-import cycle00.partychat.commands.party.PartyCreate;
-import cycle00.partychat.commands.party.PartyList;
+import cycle00.partychat.commands.party.*;
 import cycle00.partychat.utils.TabCompleterBase;
 import cycle00.partychat.utils.Utils;
 import org.bukkit.command.Command;
@@ -13,6 +11,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,6 +43,12 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
                 case "add":
                     PartyAdd.execute(player, args);
                     break;
+                case "join":
+                    PartyJoin.execute(player, args);
+                    break;
+                case "leave":
+                    PartyLeave.execute(player);
+                    break;
 
                 default:
                     player.sendMessage(Utils.chat("&cUnknown Command."));
@@ -57,7 +62,8 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> arguments = new ArrayList<>();
         //region args
-        arguments.add("create"); arguments.add("list"); arguments.add("add");
+        arguments.add("create"); arguments.add("list"); arguments.add("add"); arguments.add("join");
+        arguments.add("leave");
         //endregion
 
         if (args.length == 1) {
@@ -65,10 +71,12 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
         } else {
             switch (args[0]) {
                 case "add":
+                case "join":
                     return TabCompleterBase.getOnlinePlayers(args[1]).stream().filter(Objects::nonNull).collect(Collectors.toList());
+
+                default:
+                    return Collections.emptyList();
             }
         }
-
-        return null;
     }
 }

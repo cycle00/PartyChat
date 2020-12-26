@@ -10,8 +10,6 @@ import java.util.UUID;
 
 public class PartyList {
 
-    private static boolean cancelled = false;
-
     public static void execute(Player player) {
         if (!Party.inParty(player)) {
             player.sendMessage(Utils.chat("&cYou are not in a party.")); return;
@@ -22,7 +20,7 @@ public class PartyList {
         StringBuilder members = new StringBuilder();
         for (UUID memberUUID : party.members) {
             OfflinePlayer member = Bukkit.getOfflinePlayer(memberUUID);
-            if (Bukkit.getOnlinePlayers().contains((Player) member)) {
+            if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(member.getName()))) {
                 members.append(Utils.chat("&a•&f " + member.getName() + ", "));
             } else {
                 members.append(Utils.chat("&c•&f " + member.getName() + ", "));

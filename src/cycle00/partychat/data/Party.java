@@ -13,29 +13,20 @@ public class Party {
         this.members.add(member.getUniqueId());
     }
 
-    public boolean add(Player member) {
+    public void add(Player member) {
         if (!this.members.contains(member.getUniqueId())) {
             this.members.add(member.getUniqueId());
-            return true;
-        } else {
-            return false;
+            partyMap.put(member.getUniqueId(), this);
         }
     }
 
-    public boolean remove(Player member) {
-        if (this.members.contains(member.getUniqueId())) {
-            this.members.remove(member.getUniqueId());
-            return true;
-        } else {
-            return false;
-        }
+    public void remove(Player member) {
+        this.members.remove(member.getUniqueId());
+        partyMap.remove(member.getUniqueId());
     }
 
     public List<UUID> list() {
         return this.members;
-    }
-
-    public static void disband(Party party) {
     }
 
     public static Party getParty(Player player) {
