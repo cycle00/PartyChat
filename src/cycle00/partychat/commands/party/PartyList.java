@@ -20,7 +20,7 @@ public class PartyList {
         StringBuilder members = new StringBuilder();
         for (UUID memberUUID : party.members) {
             OfflinePlayer member = Bukkit.getOfflinePlayer(memberUUID);
-            if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(member.getName()))) {
+            if (member.isOnline()) {
                 members.append(Utils.chat("&a•&f " + member.getName() + ", "));
             } else {
                 members.append(Utils.chat("&c•&f " + member.getName() + ", "));
