@@ -30,6 +30,6 @@ public class PartyList {
         String cleanMembers = members.toString().trim();
         cleanMembers = cleanMembers.substring(0, cleanMembers.length() - 1);
 
-        player.sendMessage(Utils.chat("&6Members&f: " + cleanMembers));
+        player.sendMessage(Utils.chat("&6Members&f:\n" + cleanMembers));
     }
 }

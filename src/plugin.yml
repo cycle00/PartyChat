@@ -7,3 +7,9 @@ commands:
   party:
     description: Party management commands.
     aliases: [p]
+  partychat:
+    description: Toggle between chats.
+    aliases: [pchat, pc]
+  globalchat:
+    description: Send messages in normal chat
+    aliases: [gchat, gc]

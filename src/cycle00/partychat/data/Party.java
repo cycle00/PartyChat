@@ -1,7 +1,6 @@
 package cycle00.partychat.data;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
+import cycle00.partychat.commands.PartyChatCommand;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -13,12 +12,14 @@ public class Party {
 
     public Party(Player member) {
         this.members.add(member.getUniqueId());
+        PartyChatCommand.inPartyChat.put(member, false);
     }
 
     public void add(Player member) {
         if (!this.members.contains(member.getUniqueId())) {
             this.members.add(member.getUniqueId());
             partyMap.put(member.getUniqueId(), this);
+            PartyChatCommand.inPartyChat.put(member, false);
         }
     }
 
@@ -35,12 +36,13 @@ public class Party {
     public static void disband(Party party) {
         if (party.members.size() == 1) {
             partyMap.values().remove(party);
-            party.members.clear();
         } else {
             for (UUID memberUUID : party.members) {
                 party.remove(memberUUID);
             }
         }
+
+        party.members.clear();
     }
 
     public static Party getParty(Player player) {
