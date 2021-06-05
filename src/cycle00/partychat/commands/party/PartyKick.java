@@ -16,6 +16,11 @@ public class PartyKick {
             return;
         }
 
+        if (Party.getLeader(Party.getParty(player)) != player.getUniqueId()) {
+            player.sendMessage(Utils.chat("&cOnly the party leader can perform this command."));
+            return;
+        }
+
         if (args.length == 1) {
             player.sendMessage(Utils.chat("&cPlease specify a player to kick."));
             return;

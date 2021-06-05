@@ -19,6 +19,7 @@ public class PartyCreate {
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(PartyChat.instance, () -> {
              Party.partyMap.put(player.getUniqueId(), party);
+             party.setLeader(player);
              player.sendMessage(Utils.chat("&6Successfully created the party."));
         }, 2);
     }

@@ -17,6 +17,11 @@ public class PartyLeave {
 
         Party party = Party.getParty(player);
 
+        try {
+            if (Party.getLeader(party) == player.getUniqueId())
+                party.setLeader(party.members.get(1));
+        } catch (IndexOutOfBoundsException e) { }
+
         party.remove(player);
         if (player.isOnline()) {
             player.sendMessage(Utils.chat("&aYou have left the party."));
@@ -30,3 +35,5 @@ public class PartyLeave {
         }
     }
 }
+
+// TODO: add /p promote and test this

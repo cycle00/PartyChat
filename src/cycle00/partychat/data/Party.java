@@ -8,11 +8,20 @@ import java.util.*;
 public class Party {
     public static Map<UUID, Party> partyMap = new HashMap<>();
     public List<UUID> members = new ArrayList<>();
+    public UUID leader;
     public List<Player> pendingInvitations = new ArrayList<>();
 
     public Party(Player member) {
         this.members.add(member.getUniqueId());
         PartyChatCommand.inPartyChat.put(member, false);
+    }
+
+    public void setLeader(Player player) {
+        this.leader = player.getUniqueId();
+    }
+
+    public void setLeader(UUID player) {
+        this.leader = player;
     }
 
     public void add(Player member) {
@@ -43,6 +52,10 @@ public class Party {
         }
 
         party.members.clear();
+    }
+
+    public static UUID getLeader(Party party) {
+        return party.leader;
     }
 
     public static Party getParty(Player player) {

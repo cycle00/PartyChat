@@ -14,6 +14,11 @@ public class PartyDisband {
             return;
         }
 
+        if (Party.getLeader(Party.getParty(player)) != player.getUniqueId()) {
+            player.sendMessage(Utils.chat("&cOnly the party leader can perform this command."));
+            return;
+        }
+
         Party party = Party.getParty(player);
         for (UUID memberUUID : party.members) {
             Player member = Bukkit.getPlayer(memberUUID);
