@@ -18,8 +18,15 @@ public class PartyLeave {
         Party party = Party.getParty(player);
 
         try {
-            if (Party.getLeader(party) == player.getUniqueId())
+            if (Party.getLeader(party) == player.getUniqueId()) {
                 party.setLeader(party.members.get(1));
+                for (UUID memberUUID : party.members) {
+                    Player member = Bukkit.getPlayer(memberUUID);
+                    if (member != null) {
+                        member.sendMessage(Utils.chat("&f" + player.getDisplayName() + " &ais now party leader."));
+                    }
+                }
+            }
         } catch (IndexOutOfBoundsException e) { }
 
         party.remove(player);

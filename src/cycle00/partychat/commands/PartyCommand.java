@@ -55,6 +55,9 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
                 case "disband":
                     PartyDisband.execute(player);
                     break;
+                case "promote":
+                    PartyPromote.execute(player, args);
+                    break;
 
                 default:
                     player.sendMessage(Utils.chat("&cUnknown Command."));
@@ -69,7 +72,7 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
         List<String> arguments = new ArrayList<>();
         //region args
         arguments.add("create"); arguments.add("list"); arguments.add("add"); arguments.add("join");
-        arguments.add("leave"); arguments.add("kick"); arguments.add("disband");
+        arguments.add("leave"); arguments.add("kick"); arguments.add("disband"); arguments.add("promote");
         //endregion
 
         if (args.length == 1) {
@@ -80,6 +83,7 @@ public class PartyCommand implements CommandExecutor, TabExecutor {
                 case "join":
                     return TabCompleterBase.getOnlinePlayers(args[1]).stream().filter(Objects::nonNull).collect(Collectors.toList());
                 case "kick":
+                case "promote":
                     List<String> members = new ArrayList<>();
                     for (UUID memberUUID : Party.getParty((Player) sender).members) {
                         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(memberUUID);
