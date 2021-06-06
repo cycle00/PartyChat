@@ -18,18 +18,33 @@ public class PartyList {
         Party party = Party.getParty(player);
 
         StringBuilder members = new StringBuilder();
+        String leader = "";
         for (UUID memberUUID : party.members) {
             OfflinePlayer member = Bukkit.getOfflinePlayer(memberUUID);
-            if (member.isOnline()) {
-                members.append(Utils.chat("&a•&f " + member.getName() + ", "));
+
+            if (member.getUniqueId() == party.leader) {
+                if (member.isOnline()) {
+                    leader = "&a•&f " + member.getName();
+                } else {
+                    leader = "&c•&f " + member.getName();
+                }
             } else {
-                members.append(Utils.chat("&c•&f " + member.getName() + ", "));
+                if (member.isOnline()) {
+                    members.append(Utils.chat("&a•&f " + member.getName() + ", "));
+                } else {
+                    members.append(Utils.chat("&c•&f " + member.getName() + ", "));
+                }
             }
         }
 
-        String cleanMembers = members.toString().trim();
-        cleanMembers = cleanMembers.substring(0, cleanMembers.length() - 1);
+        player.sendMessage(Utils.chat("&6Leader&f:\n" + leader + "\n"));
 
-        player.sendMessage(Utils.chat("&6Members&f:\n" + cleanMembers));
+        if (!members.isEmpty()) {
+            String cleanMembers = members.toString().trim();
+            cleanMembers = cleanMembers.substring(0, cleanMembers.length() - 1);
+            if (cleanMembers.split("\\s+").length < 1) {
+                player.sendMessage(Utils.chat("&6Members&f:\n" + cleanMembers)); // TODO: fix this
+            }
+        }
     }
 }

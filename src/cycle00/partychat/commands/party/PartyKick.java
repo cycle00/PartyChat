@@ -43,6 +43,11 @@ public class PartyKick {
             return;
         }
 
+        if (playerToKick == player) {
+            player.sendMessage(Utils.chat("&cYou cannot kick yourself from the party."));
+            return;
+        }
+
         if (Party.getParty(player.getUniqueId()) != Party.getParty(playerToKick.getUniqueId())) {
             player.sendMessage(Utils.chat("&cYou are not in the same party as the player you want to kick."));
             return;

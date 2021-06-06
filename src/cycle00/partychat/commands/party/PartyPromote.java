@@ -43,8 +43,14 @@ public class PartyPromote {
             return;
         }
 
+        if (playerToPromote == player) {
+            player.sendMessage(Utils.chat("&cYou are already party leader."));
+            return;
+        }
+
         if (Party.getParty(player.getUniqueId()) != Party.getParty(playerToPromote.getUniqueId())) {
             player.sendMessage(Utils.chat("&cYou are not in the same party as the player you want to promote."));
+            return;
         }
 
         // if all checks pass

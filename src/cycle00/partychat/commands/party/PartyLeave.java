@@ -23,7 +23,7 @@ public class PartyLeave {
                 for (UUID memberUUID : party.members) {
                     Player member = Bukkit.getPlayer(memberUUID);
                     if (member != null) {
-                        member.sendMessage(Utils.chat("&f" + player.getDisplayName() + " &ais now party leader."));
+                        member.sendMessage(Utils.chat("&f" + Bukkit.getPlayer(Party.getLeader(party)).getDisplayName() + " &ais now party leader."));
                     }
                 }
             }
