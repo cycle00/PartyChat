@@ -42,9 +42,7 @@ public class PartyList {
         if (!members.isEmpty()) {
             String cleanMembers = members.toString().trim();
             cleanMembers = cleanMembers.substring(0, cleanMembers.length() - 1);
-            if (cleanMembers.split("\\s+").length < 1) {
-                player.sendMessage(Utils.chat("&6Members&f:\n" + cleanMembers)); // TODO: fix this
-            }
+            player.sendMessage(Utils.chat("\n&6Members&f:\n" + cleanMembers));
         }
     }
 }

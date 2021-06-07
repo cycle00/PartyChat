@@ -20,6 +20,7 @@ public class PartyLeave {
         try {
             if (Party.getLeader(party) == player.getUniqueId()) {
                 party.setLeader(party.members.get(1));
+
                 for (UUID memberUUID : party.members) {
                     Player member = Bukkit.getPlayer(memberUUID);
                     if (member != null) {
@@ -42,5 +43,3 @@ public class PartyLeave {
         }
     }
 }
-
-// TODO: add /p promote and test this
